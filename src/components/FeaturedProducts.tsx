@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
@@ -40,9 +40,27 @@ const featuredProducts: Product[] = [
 // Define props type
 interface FeaturedProductsProps {
   onAddToCart: (product: Product) => void;
+  onAnimateCart: (position: { x: number; y: number }) => void; // Add prop for cart animation
 }
 
-const FeaturedProducts: React.FC<FeaturedProductsProps> = ({ onAddToCart }) => {
+const FeaturedProducts: React.FC<FeaturedProductsProps> = ({ onAddToCart, onAnimateCart }) => {
+  const [addedToCartIndex, setAddedToCartIndex] = useState<number | null>(null);
+
+  const handleAddToCart = (product: Product, index: number, event: React.MouseEvent) => {
+    const buttonRect = event.currentTarget.getBoundingClientRect();
+    const position = {
+      x: buttonRect.x + buttonRect.width / 2,
+      y: buttonRect.y + buttonRect.height / 2,
+    };
+
+    onAnimateCart(position); // Trigger the animation to the cart
+    setAddedToCartIndex(index);
+    onAddToCart(product);
+    setTimeout(() => {
+      setAddedToCartIndex(null); // Reset after animation
+    }, 500); // Duration of the animation
+  };
+
   return (
     <section className="py-12 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -59,7 +77,10 @@ const FeaturedProducts: React.FC<FeaturedProductsProps> = ({ onAddToCart }) => {
                 <p className="text-lg font-bold mt-2">{product.price}</p>
               </CardContent>
               <CardFooter>
-                <Button className="w-full" onClick={() => onAddToCart(product)}>
+                <Button
+                  className="w-full"
+                  onClick={(event) => handleAddToCart(product, index, event)}
+                >
                   Add to Cart
                 </Button>
               </CardFooter>

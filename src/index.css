@@ -74,4 +74,17 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  /* Add this to your CSS file */
+.cart-animation {
+  position: absolute;
+  width: 24px; /* Adjust size as needed */
+  height: 24px; /* Adjust size as needed */
+  background-color: #4f46e5; /* Cart icon color */
+  border-radius: 50%;
+  pointer-events: none; /* Prevent mouse interactions */
+  transform: translate(-50%, -50%);
+  transition: transform 0.5s ease-in-out;
+}
+
 }

@@ -29,7 +29,7 @@ const Index = () => {
       <Toaster />
       <Navbar onCartClick={() => setIsCartOpen(true)} />
       <Hero />
-      <FeaturedProducts onAddToCart={handleAddToCart} />
+      <FeaturedProducts onAddToCart={handleAddToCart} onAnimateCart={() => console.log('Animating cart...')} />
       <Chatbot />
       <Services />
       <Footer />
