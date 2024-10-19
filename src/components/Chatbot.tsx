@@ -27,10 +27,10 @@ const Chatbot = () => {
       const userMessage: Message = { text: input, sender: 'user' };
       setMessages(prevMessages => [...prevMessages, userMessage]);
       setInput('');
-      
+
       // Simulate bot response
       setTimeout(() => {
-        const botResponse = getBotResponse(input);
+        const botResponse = getBotResponse(userMessage.text);
         setMessages(prevMessages => [...prevMessages, { text: botResponse, sender: 'bot' }]);
       }, 1000);
     }
@@ -54,6 +54,12 @@ const Chatbot = () => {
       title: "Image Upload",
       description: "This feature is not yet implemented. We apologize for the inconvenience.",
     });
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      handleSendMessage();
+    }
   };
 
   return (
@@ -82,7 +88,7 @@ const Chatbot = () => {
               placeholder="Type a message..."
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
+              onKeyDown={handleKeyDown}  // Updated this to onKeyDown
               className="flex-1 mr-2"
             />
             <Button onClick={handleSendMessage} size="icon">
