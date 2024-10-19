@@ -8,11 +8,17 @@ import Footer from '@/components/Footer';
 import Chatbot from '@/components/Chatbot';
 import Cart from '@/components/Cart';
 
+interface Product {
+  name: string;
+  price: string;
+  // Add other properties as needed
+}
+
 const Index = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const [cartItems, setCartItems] = useState([]);
+  const [cartItems, setCartItems] = useState<Product[]>([]);
 
-  const handleAddToCart = (product) => {
+  const handleAddToCart = (product: Product) => {
     setCartItems([...cartItems, product]);
   };
 

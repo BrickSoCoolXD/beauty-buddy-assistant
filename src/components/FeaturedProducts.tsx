@@ -30,11 +30,15 @@ const featuredProducts = [
   }
 ];
 
-const FeaturedProducts = () => {
+interface FeaturedProductsProps {
+  onAddToCart: (product: any) => void;
+}
+
+const FeaturedProducts: React.FC<FeaturedProductsProps> = ({ onAddToCart }) => {
   const { toast } = useToast();
 
-  const handleAddToCart = (product) => {
-    // Here you would typically update a cart state or send to an API
+  const handleAddToCart = (product: any) => {
+    onAddToCart(product);
     toast({
       title: "Added to Cart",
       description: `${product.name} has been added to your cart.`,
