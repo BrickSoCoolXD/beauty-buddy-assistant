@@ -9,14 +9,12 @@ import Chatbot from '@/components/Chatbot';
 import Cart from '@/components/Cart';
 import ShoppingPage from '@/components/ShoppingPage';
 
-
 interface Product {
   name: string;
   price: string;
   category: string;
   image: string;
 }
-
 
 const Index = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -33,11 +31,11 @@ const Index = () => {
       <Hero />
       <FeaturedProducts onAddToCart={handleAddToCart} />
       <Chatbot />
-      {/* Add ShoppingPage component here */}
-      <ShoppingPage />
       <Services />
       <Footer />
       <Cart isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} items={cartItems} />
     </div>
   );
 };
+
+export default Index;
