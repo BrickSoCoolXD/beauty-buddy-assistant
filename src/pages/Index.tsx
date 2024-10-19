@@ -28,9 +28,9 @@ const Index = () => {
       <Navbar onCartClick={() => setIsCartOpen(true)} />
       <Hero />
       <FeaturedProducts onAddToCart={handleAddToCart} />
+      <Chatbot />
       <Services />
       <Footer />
-      <Chatbot />
       <Cart isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} items={cartItems} />
     </div>
   );
