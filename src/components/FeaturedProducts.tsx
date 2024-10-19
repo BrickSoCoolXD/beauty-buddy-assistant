@@ -1,9 +1,16 @@
 import React from 'react';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { useToast } from "@/components/ui/use-toast";
 
-const featuredProducts = [
+// Define Product type
+interface Product {
+  name: string;
+  category: string;
+  price: string;
+  image: string;
+}
+
+const featuredProducts: Product[] = [
   {
     name: "Cetaphil Gentle Skin Cleanser",
     category: "Skincare",
@@ -30,21 +37,12 @@ const featuredProducts = [
   }
 ];
 
+// Define props type
 interface FeaturedProductsProps {
-  onAddToCart: (product: any) => void;
+  onAddToCart: (product: Product) => void;
 }
 
 const FeaturedProducts: React.FC<FeaturedProductsProps> = ({ onAddToCart }) => {
-  const { toast } = useToast();
-
-  const handleAddToCart = (product: any) => {
-    onAddToCart(product);
-    toast({
-      title: "Added to Cart",
-      description: `${product.name} has been added to your cart.`,
-    });
-  };
-
   return (
     <section className="py-12 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -61,7 +59,9 @@ const FeaturedProducts: React.FC<FeaturedProductsProps> = ({ onAddToCart }) => {
                 <p className="text-lg font-bold mt-2">{product.price}</p>
               </CardContent>
               <CardFooter>
-                <Button className="w-full" onClick={() => handleAddToCart(product)}>Add to Cart</Button>
+                <Button className="w-full" onClick={() => onAddToCart(product)}>
+                  Add to Cart
+                </Button>
               </CardFooter>
             </Card>
           ))}
